@@ -18,6 +18,7 @@ public class DemoFragment extends Fragment implements DemoFragmentView.ActionImp
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = contentView.createView(inflater, savedInstanceState);
+        contentView.setActionImpl(this);
         return view;
     }
 
