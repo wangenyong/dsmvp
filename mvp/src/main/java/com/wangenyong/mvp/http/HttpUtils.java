@@ -24,18 +24,21 @@ public class HttpUtils {
         return SingletonHolder.INSTANCE;
     }
 
-    public void toSubscribe(Observable ob, final ProgressObserver subscriber, String cacheKey, RxAppCompatActivity activity, boolean isSave, boolean forceRefresh) {
+    public void toSubscribe(Observable ob, final ProgressObserver observer, String cacheKey, RxAppCompatActivity activity, boolean isSave, boolean forceRefresh) {
         Observable observable = ob
                 .compose(RxHelper.handleResult())
                 .compose(activity.bindToLifecycle());
 
-
+        RetrofitCache.load(cacheKey, observable, isSave, forceRefresh)
+                .subscribe(observer);
     }
 
-    public void toSubscribe(Observable ob, final ProgressObserver subscriber, String cacheKey, RxFragment fragment, boolean isSave, boolean forceRefresh) {
+    public void toSubscribe(Observable ob, final ProgressObserver observer, String cacheKey, RxFragment fragment, boolean isSave, boolean forceRefresh) {
         Observable observable = ob
                 .compose(RxHelper.handleResult())
                 .compose(fragment.bindToLifecycle());
+        RetrofitCache.load(cacheKey, observable, isSave, forceRefresh)
+                .subscribe(observer);
     }
 }
 
