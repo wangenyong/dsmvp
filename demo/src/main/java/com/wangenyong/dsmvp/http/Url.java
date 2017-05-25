@@ -5,5 +5,5 @@ package com.wangenyong.dsmvp.http;
  */
 
 public class Url {
-    public static final String BASE_URL = "https://api.douban.com/v2/movie/";
+    public static final String BASE_URL = "http://gank.io/api/";
 }
