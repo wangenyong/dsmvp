@@ -4,32 +4,8 @@ package com.wangenyong.mvp.http;
  * Created by wangenyong on 2017/5/23.
  */
 
-public class HttpResult<T> {
-    private int code;
-    private String message;
-    private T data;
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
+public abstract class HttpResult<T> {
+    public abstract boolean successful();
+    public abstract T getData();
+    public abstract String getMessage();
 }

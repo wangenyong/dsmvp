@@ -5,8 +5,14 @@ package com.wangenyong.mvp.http;
  */
 
 public class ApiException extends RuntimeException {
+    protected String message;
 
-    public ApiException(int resultCode) {
+    public ApiException(String message) {
+        this.message = message;
+    }
 
+    @Override
+    public String getMessage() {
+        return message;
     }
 }

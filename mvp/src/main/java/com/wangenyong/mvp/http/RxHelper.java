@@ -29,10 +29,10 @@ public class RxHelper {
                 return upstream.flatMap(new Function<HttpResult<T>, ObservableSource<T>>() {
                     @Override
                     public ObservableSource<T> apply(@NonNull HttpResult<T> tHttpResult) throws Exception {
-                        if (tHttpResult.getCode() != 404) {
+                        if (tHttpResult.successful()) {
                             return createData(tHttpResult.getData());
                         } else {
-                            return Observable.error(new ApiException(tHttpResult.getCode()));
+                            return Observable.error(new ApiException(tHttpResult.getMessage()));
                         }
                     }
                 }).subscribeOn(Schedulers.io())
