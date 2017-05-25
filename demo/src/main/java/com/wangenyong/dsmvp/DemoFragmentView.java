@@ -1,5 +1,8 @@
 package com.wangenyong.dsmvp;
 
+import android.widget.TextView;
+
+import com.wangenyong.mvp.bind.BindId;
 import com.wangenyong.mvp.bind.BindLayout;
 import com.wangenyong.mvp.view.ContentView;
 
@@ -9,6 +12,8 @@ import com.wangenyong.mvp.view.ContentView;
 
 @BindLayout(R.layout.fragment_demo)
 public class DemoFragmentView extends ContentView {
+    @BindId(R.id.textView_demoFragment)
+    TextView mTextView;
 
     private ActionImpl actionImpl;
 
@@ -16,6 +21,9 @@ public class DemoFragmentView extends ContentView {
         this.actionImpl = actionImpl;
     }
 
+    public void setTextView(String text) {
+        mTextView.setText(text);
+    }
 
     public interface ActionImpl {
         void doAction();

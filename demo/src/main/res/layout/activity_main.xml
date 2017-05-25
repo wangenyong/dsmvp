@@ -7,6 +7,11 @@
     android:layout_height="match_parent"
     tools:context="com.wangenyong.dsmvp.MainActivity">
 
+    <FrameLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_bar"/>
 
     <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
         android:id="@+id/bottom_bar"
@@ -17,5 +22,4 @@
         app:itemIconTint="@drawable/selector_item_gray_color"
         app:itemTextColor="@drawable/selector_item_gray_color"
         app:menu="@menu/menu_tab"/>
-
 </RelativeLayout>

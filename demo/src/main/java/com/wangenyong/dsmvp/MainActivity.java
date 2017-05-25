@@ -11,5 +11,12 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(contentView.createView(this, savedInstanceState));
+        contentView.initView(this, savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        contentView.onSaveInstanceState(outState);
     }
 }
