@@ -18,10 +18,12 @@ public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancel
     private Disposable mDisposable;
     private boolean isRefresh;
     private boolean isLoadMore;
+    private String loadingInfo;
 
-    public ProgressObserver(Context context, boolean refresh, boolean loadMore) {
+    public ProgressObserver(Context context, boolean refresh, boolean loadMore, String info) {
         isRefresh = refresh;
         isLoadMore = loadMore;
+        loadingInfo = info;
         dialogHandler = new SimpleLoadDialog(context, this, true);
     }
 
@@ -64,7 +66,7 @@ public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancel
      */
     public void showProgressDialog(){
         if (!isRefresh && !isLoadMore && dialogHandler != null) {
-            dialogHandler.show();
+            dialogHandler.show(loadingInfo);
         }
     }
 

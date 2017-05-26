@@ -1,15 +1,17 @@
 package com.wangenyong.mvp.view;
 
 import android.app.Activity;
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
 import com.wangenyong.mvp.R;
 import com.wangenyong.mvp.http.ProgressCancelListener;
@@ -22,7 +24,7 @@ import java.lang.ref.WeakReference;
 
 public class SimpleLoadDialog extends Handler {
 
-    private Dialog load = null;
+    private AlertDialog load = null;
 
     public static final int SHOW_PROGRESS_DIALOG = 1;
     public static final int DISMISS_PROGRESS_DIALOG = 2;
@@ -40,16 +42,12 @@ public class SimpleLoadDialog extends Handler {
         this.cancelable = cancelable;
     }
 
-    private void create(){
+    private void create(String info) {
         if (load == null) {
             context  = reference.get();
-
-            load = new Dialog(context, R.style.loadstyle);
-            View dialogView = LayoutInflater.from(context).inflate(
-                    R.layout.dialog_load_layout, null);
+            load = new AlertDialog.Builder(context).create();
             load.setCanceledOnTouchOutside(false);
             load.setCancelable(cancelable);
-            load.setContentView(dialogView);
             load.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
@@ -57,17 +55,21 @@ public class SimpleLoadDialog extends Handler {
                         mProgressCancelListener.onCancelProgress();
                 }
             });
+            if (!load.isShowing() && context != null) {
+                load.show();
+            }
             Window dialogWindow = load.getWindow();
-            dialogWindow.setGravity(Gravity.CENTER_VERTICAL
-                    | Gravity.CENTER_HORIZONTAL);
-        }
-        if (!load.isShowing()&&context!=null) {
-            load.show();
+            dialogWindow.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+            dialogWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialogWindow.setContentView(R.layout.dialog_load_layout);
+            if (!TextUtils.isEmpty(info.trim())) {
+                ((TextView) (dialogWindow.findViewById(R.id.content_text))).setText(info);
+            }
         }
     }
 
-    public void show(){
-        create();
+    public void show(String info){
+        create(info);
     }
 
 
@@ -84,7 +86,7 @@ public class SimpleLoadDialog extends Handler {
     public void handleMessage(Message msg) {
         switch (msg.what) {
             case SHOW_PROGRESS_DIALOG:
-                create();
+                create("");
                 break;
             case DISMISS_PROGRESS_DIALOG:
                 dismiss();

@@ -1,18 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center">
 
-    <com.github.ybq.android.spinkit.SpinKitView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/SpinKitView.DoubleBounce"
-        android:padding="16dp"
-        android:layout_gravity="center"
-        app:SpinKit_Color="@color/colorAccent"/>
+        android:layout_centerVertical="true"
+        android:background="@drawable/shape_loading" >
 
-</LinearLayout>
+        <ProgressBar
+            android:id="@+id/loading_bar"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp" />
+
+        <TextView
+            android:id="@+id/content_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/loading_bar"
+            android:paddingBottom="15dp"
+            android:paddingRight="25dp"
+            android:paddingTop="15dp"
+            android:text="@string/load_more_text"
+            android:textColor="#ffffff"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+</RelativeLayout>
