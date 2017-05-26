@@ -13,6 +13,6 @@
         style="@style/SpinKitView.DoubleBounce"
         android:padding="16dp"
         android:layout_gravity="center"
-        app:SpinKit_Color="@color/colorPrimary"/>
+        app:SpinKit_Color="@color/colorAccent"/>
 
 </LinearLayout>
