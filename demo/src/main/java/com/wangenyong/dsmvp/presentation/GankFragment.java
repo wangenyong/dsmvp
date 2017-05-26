@@ -20,9 +20,10 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-public class GankFragment extends BaseFragment {
+public class GankFragment extends BaseFragment implements GankFragmentView.ActionImpl {
     private GankFragmentView contentView = new GankFragmentView();
     private List<Gank> mGanks;
+    private int mPage = 1;
 
     public static GankFragment newInstance() {
         GankFragment fragment = new GankFragment();
@@ -33,6 +34,7 @@ public class GankFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = contentView.createView(inflater, savedInstanceState);
+        contentView.setActionImpl(this);
         return view;
     }
 
@@ -41,22 +43,40 @@ public class GankFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mGanks = new ArrayList<>();
         contentView.initView(mGanks);
-        getGank();
+        getGank(mPage, false, false);
     }
 
-    private void getGank() {
-        Observable ob = Api.getDefault().getGank(20, 1);
-        HttpUtils.getInstance().toSubscribe(ob, new ProgressObserver<List<Gank>>(getActivity()) {
+    @Override
+    public void onRefresh() {
+        mPage = 1;
+        mGanks.clear();
+        getGank(mPage, true, false);
+    }
+
+    @Override
+    public void onLoadMore() {
+        getGank(++mPage, false, true);
+    }
+
+    private void getGank(int page, final boolean isRefresh, final boolean isLoadMore) {
+        Observable ob = Api.getDefault().getGank(20, page);
+        HttpUtils.getInstance().toSubscribe(ob, new ProgressObserver<List<Gank>>(getActivity(), isRefresh, isLoadMore) {
             @Override
             protected void _onNext(List<Gank> ganks) {
                 mGanks.addAll(ganks);
-                contentView.notifyDataSetChanged();
+                if (isLoadMore) {
+                    contentView.loadMoreSuccess();
+                } else {
+                    contentView.showGans();
+                }
             }
 
             @Override
             protected void _onError(String message) {
                 Log.d("Gank", message);
+                contentView.onError(getActivity(), message);
             }
         }, "cacheKey", this, false, false);
     }
+
 }
