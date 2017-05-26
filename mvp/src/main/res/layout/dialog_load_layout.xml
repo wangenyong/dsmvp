@@ -10,9 +10,9 @@
     <com.github.ybq.android.spinkit.SpinKitView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/SpinKitView.CubeGrid"
-        android:padding="20dp"
+        style="@style/SpinKitView.DoubleBounce"
+        android:padding="16dp"
         android:layout_gravity="center"
-        app:SpinKit_Color="@color/colorAccent"/>
+        app:SpinKit_Color="@color/colorPrimary"/>
 
 </LinearLayout>
