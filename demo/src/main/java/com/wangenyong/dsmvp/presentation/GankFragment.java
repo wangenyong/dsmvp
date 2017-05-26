@@ -60,7 +60,7 @@ public class GankFragment extends BaseFragment implements GankFragmentView.Actio
 
     private void getGank(int page, final boolean isRefresh, final boolean isLoadMore) {
         Observable ob = Api.getDefault().getGank(20, page);
-        HttpUtils.getInstance().toSubscribe(ob, new ProgressObserver<List<Gank>>(getActivity(), isRefresh, isLoadMore) {
+        HttpUtils.getInstance().toSubscribe(ob, new ProgressObserver<List<Gank>>(getActivity(), isRefresh, isLoadMore, " ") {
             @Override
             protected void _onNext(List<Gank> ganks) {
                 mGanks.addAll(ganks);
@@ -74,9 +74,12 @@ public class GankFragment extends BaseFragment implements GankFragmentView.Actio
             @Override
             protected void _onError(String message) {
                 Log.d("Gank", message);
+                if (isLoadMore) {
+                    mPage--;
+                }
                 contentView.onError(getActivity(), message);
             }
-        }, "cacheKey", this, false, false);
+        }, "cacheKey", this, false, true);
     }
 
 }
