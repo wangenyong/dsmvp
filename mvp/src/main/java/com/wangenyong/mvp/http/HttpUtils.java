@@ -37,6 +37,7 @@ public class HttpUtils {
                     }
                 })
                 .compose(activity.bindToLifecycle());
+
         RetrofitCache.load(cacheKey, observable, isSave, forceRefresh)
                 .subscribe(observer);
     }
