@@ -49,7 +49,6 @@ public class GankFragment extends BaseFragment implements GankFragmentView.Actio
     @Override
     public void onRefresh() {
         mPage = 1;
-        mGanks.clear();
         getGank(mPage, true, false);
     }
 
@@ -67,6 +66,7 @@ public class GankFragment extends BaseFragment implements GankFragmentView.Actio
                 if (isLoadMore) {
                     contentView.loadMoreSuccess();
                 } else {
+                    ganks.clear();
                     contentView.showGans();
                 }
             }
