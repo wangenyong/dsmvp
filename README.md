@@ -13,3 +13,45 @@ Google官方MVP示例是将 Activity 作为 V，单独创建 Presenter 将原来
 | 实现所有View逻辑，隔离用户与P |业务逻辑，隔离V和M，通过接口与两者交互 |数据交互|
 
 > 该思想的实现主要参考自 [Android MVP 不一样的实现方案](https://github.com/Yeamy/MVPDemo/blob/master/README.md)
+
+## 实现
+### View
+#### [ContentView](https://github.com/wangenyong/dsmvp/blob/master/mvp/src/main/java/com/wangenyong/mvp/view/ContentView.java)
+View的基类，处理所有有关View的操作，实际使用时，只需继承 ContentView 来实现不同的视图页面。
+```
+@BindLayout(R.layout.activity_main)
+public class MainView extends Conetent {
+  @BindId(R.id.bottom_bar)
+  ...
+}
+```
+这里的注解会在 ContentView 中进行处理，实现视图以及点击事件的绑定，然后在 Activity 或者 Fragment 中进行初始化即可。
+#### [MainActivity](https://github.com/wangenyong/dsmvp/blob/master/demo/src/main/java/com/wangenyong/dsmvp/MainActivity.java)
+```
+public class MainActivity extends BaseActivity {
+  private MainView contentView = new MainView();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(contentView.createView(this, savedInstanceState));
+    }
+    ...
+}
+```
+#### [GankFragment](https://github.com/wangenyong/dsmvp/blob/master/demo/src/main/java/com/wangenyong/dsmvp/presentation/GankFragment.java)
+```
+public class GankFragment extends BaseFragment implements GankFragmentView.ActionImpl {
+    private GankFragmentView contentView = new GankFragmentView();
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = contentView.createView(inflater, savedInstanceState);
+        contentView.setActionImpl(this);
+        return view;
+    }
+    ...
+}
+```
+### P 和 V 的通信
+Activity 和 Fragment 持有 ContentView，可以直接调用 View 中的方法来显示内容；
