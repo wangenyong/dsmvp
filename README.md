@@ -93,3 +93,9 @@ private void getGank(int page, final boolean isRefresh, final boolean isLoadMore
 ```
 ## 其他
 此方案尽可能的简化架构的复杂性，充分利用 Retrofit2 和 RxJava2 带来的便利性，在此基础之上，根据实际的项目需求来进行调整和补充。
+
+## 包含的工具类和自定义组件
+* [DataHelper](https://github.com/wangenyong/dsmvp/blob/master/mvp/src/main/java/com/wangenyong/mvp/util/DataHelper.java) sharedPreferences 存储工具类
+* [DeviceUtils](https://github.com/wangenyong/dsmvp/blob/master/mvp/src/main/java/com/wangenyong/mvp/util/DeviceUtils.java) 设备信息相关的工具类
+* [PullLoadMoreRecyclerView](https://github.com/wangenyong/dsmvp/blob/master/mvp/src/main/java/com/wangenyong/mvp/view/recyclerview/PullLoadMoreRecyclerView.java) 带下拉刷新和自动加载的 RecyclerView
+* [SimpleLoadDialog](https://github.com/wangenyong/dsmvp/blob/master/mvp/src/main/java/com/wangenyong/mvp/view/SimpleLoadDialog.java) 加载数据的提示对话框
