@@ -91,4 +91,5 @@ private void getGank(int page, final boolean isRefresh, final boolean isLoadMore
     }, "cacheKey", this, false, true);
 }
 ```
-
+## 其他
+此方案尽可能的简化架构的复杂性，充分利用 Retrofit2 和 RxJava2 带来的便利性，在此基础之上，根据实际的项目需求来进行调整和补充。
