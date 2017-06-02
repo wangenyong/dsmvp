@@ -54,4 +54,41 @@ public class GankFragment extends BaseFragment implements GankFragmentView.Actio
 }
 ```
 ### P 和 V 的通信
-Activity 和 Fragment 持有 ContentView，可以直接调用 View 中的方法来显示内容；
+Activity 和 Fragment 持有 ContentView，可以直接调用 View 中的方法来显示内容；反过来通过声明接口来回调 Activity 和 Fragment 中的方法。
+```
+public interface ActionImpl extends PullLoadMoreRecyclerView.PullLoadMoreListener {
+        @Override
+        void onRefresh();
+        @Override
+        void onLoadMore();
+    }
+```
+### Model
+在移动开发中，数据主要来自远程服务器，因此 Model 的主要功能是通过网络接口获取数据，这里通过 Retrofit2 + RxJava2 来实现。由于 Retrofit2 的使用已经十分简洁，因此并未单独创建 Model文件，而是直接在 P 中调用，这里可以根据实际情况进行划分。
+```
+private void getGank(int page, final boolean isRefresh, final boolean isLoadMore) {
+    Observable ob = Api.getDefault().getGank(20, page);
+    HttpUtils.getInstance().toSubscribe(ob, new ProgressObserver<List<Gank>>(getActivity(), isRefresh, isLoadMore, " ") {
+        @Override
+        protected void _onNext(List<Gank> ganks) {
+            mGanks.addAll(ganks);
+            if (isLoadMore) {
+                contentView.loadMoreSuccess();
+            } else {
+                ganks.clear();
+                contentView.showGans();
+            }
+        }
+
+        @Override
+        protected void _onError(String message) {
+            Log.d("Gank", message);
+            if (isLoadMore) {
+                mPage--;
+            }
+            contentView.onError(getActivity(), message);
+        }
+    }, "cacheKey", this, false, true);
+}
+```
+
