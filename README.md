@@ -13,3 +13,89 @@ Google官方MVP示例是将 Activity 作为 V，单独创建 Presenter 将原来
 | 实现所有View逻辑，隔离用户与P |业务逻辑，隔离V和M，通过接口与两者交互 |数据交互|
 
 > 该思想的实现主要参考自 [Android MVP 不一样的实现方案](https://github.com/Yeamy/MVPDemo/blob/master/README.md)
+
+## 实现
+### View
+#### [ContentView](https://github.com/wangenyong/dsmvp/blob/master/mvp/src/main/java/com/wangenyong/mvp/view/ContentView.java)
+View的基类，处理所有有关View的操作，实际使用时，只需继承 ContentView 来实现不同的视图页面。
+```
+@BindLayout(R.layout.activity_main)
+public class MainView extends Conetent {
+  @BindId(R.id.bottom_bar)
+  ...
+}
+```
+这里的注解会在 ContentView 中进行处理，实现视图以及点击事件的绑定，然后在 Activity 或者 Fragment 中进行初始化即可。
+#### [MainActivity](https://github.com/wangenyong/dsmvp/blob/master/demo/src/main/java/com/wangenyong/dsmvp/MainActivity.java)
+```
+public class MainActivity extends BaseActivity {
+  private MainView contentView = new MainView();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(contentView.createView(this, savedInstanceState));
+    }
+    ...
+}
+```
+#### [GankFragment](https://github.com/wangenyong/dsmvp/blob/master/demo/src/main/java/com/wangenyong/dsmvp/presentation/GankFragment.java)
+```
+public class GankFragment extends BaseFragment implements GankFragmentView.ActionImpl {
+    private GankFragmentView contentView = new GankFragmentView();
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = contentView.createView(inflater, savedInstanceState);
+        contentView.setActionImpl(this);
+        return view;
+    }
+    ...
+}
+```
+### P 和 V 的通信
+Activity 和 Fragment 持有 ContentView，可以直接调用 View 中的方法来显示内容；反过来通过声明接口来回调 Activity 和 Fragment 中的方法。
+```
+public interface ActionImpl extends PullLoadMoreRecyclerView.PullLoadMoreListener {
+        @Override
+        void onRefresh();
+        @Override
+        void onLoadMore();
+    }
+```
+### Model
+在移动开发中，数据主要来自远程服务器，因此 Model 的主要功能是通过网络接口获取数据，这里通过 Retrofit2 + RxJava2 来实现。由于 Retrofit2 的使用已经十分简洁，因此并未单独创建 Model文件，而是直接在 P 中调用，这里可以根据实际情况进行划分。
+```
+private void getGank(int page, final boolean isRefresh, final boolean isLoadMore) {
+    Observable ob = Api.getDefault().getGank(20, page);
+    HttpUtils.getInstance().toSubscribe(ob, new ProgressObserver<List<Gank>>(getActivity(), isRefresh, isLoadMore, " ") {
+        @Override
+        protected void _onNext(List<Gank> ganks) {
+            mGanks.addAll(ganks);
+            if (isLoadMore) {
+                contentView.loadMoreSuccess();
+            } else {
+                ganks.clear();
+                contentView.showGans();
+            }
+        }
+
+        @Override
+        protected void _onError(String message) {
+            Log.d("Gank", message);
+            if (isLoadMore) {
+                mPage--;
+            }
+            contentView.onError(getActivity(), message);
+        }
+    }, "cacheKey", this, false, true);
+}
+```
+## 其他
+此方案尽可能的简化架构的复杂性，充分利用 Retrofit2 和 RxJava2 带来的便利性，在此基础之上，根据实际的项目需求来进行调整和补充。
+
+## 包含的工具类和自定义组件
+* [DataHelper](https://github.com/wangenyong/dsmvp/blob/master/mvp/src/main/java/com/wangenyong/mvp/util/DataHelper.java) sharedPreferences 存储工具类
+* [DeviceUtils](https://github.com/wangenyong/dsmvp/blob/master/mvp/src/main/java/com/wangenyong/mvp/util/DeviceUtils.java) 设备信息相关的工具类
+* [PullLoadMoreRecyclerView](https://github.com/wangenyong/dsmvp/blob/master/mvp/src/main/java/com/wangenyong/mvp/view/recyclerview/PullLoadMoreRecyclerView.java) 带下拉刷新和自动加载的 RecyclerView
+* [SimpleLoadDialog](https://github.com/wangenyong/dsmvp/blob/master/mvp/src/main/java/com/wangenyong/mvp/view/SimpleLoadDialog.java) 加载数据的提示对话框
