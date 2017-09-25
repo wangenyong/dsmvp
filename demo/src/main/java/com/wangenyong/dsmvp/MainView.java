@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.ncapdevi.fragnav.FragNavController;
+import com.wangenyong.dsmvp.presentation.AndroidFragment;
 import com.wangenyong.dsmvp.presentation.GankFragment;
 import com.wangenyong.mvp.base.BaseActivity;
 import com.wangenyong.mvp.bind.BindId;
@@ -45,13 +46,10 @@ public class MainView extends ContentView {
 
         GankFragment gankFragment = GankFragment.newInstance();
 
-        DemoFragment androidFragment = new DemoFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("text", "Android");
-        androidFragment.setArguments(bundle);
+        AndroidFragment androidFragment = AndroidFragment.newInstance();
 
         DemoFragment likeFragment = new DemoFragment();
-        bundle = new Bundle();
+        Bundle bundle = new Bundle();
         bundle.putString("text", "Like");
         likeFragment.setArguments(bundle);
 
