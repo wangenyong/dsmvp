@@ -18,6 +18,8 @@ import com.wangenyong.mvp.bind.BindLayout;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import butterknife.ButterKnife;
+
 /**
  * View的基类，处理所有有关View的操作
  */
@@ -31,6 +33,7 @@ public class ContentView {
     public View createView(LayoutInflater inflater, @Nullable Bundle savedInstanceState) {
         int layout = getClass().getAnnotation(BindLayout.class).value();
         View view = inflater.inflate(layout, null);
+        ButterKnife.bind(this, view);
         clickImpl.setOnClickListener(view);
         setViewField(this, view);
         return view;
