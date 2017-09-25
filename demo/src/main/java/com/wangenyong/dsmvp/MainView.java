@@ -12,12 +12,13 @@ import com.ncapdevi.fragnav.FragNavController;
 import com.wangenyong.dsmvp.presentation.AndroidFragment;
 import com.wangenyong.dsmvp.presentation.GankFragment;
 import com.wangenyong.mvp.base.BaseActivity;
-import com.wangenyong.mvp.bind.BindId;
 import com.wangenyong.mvp.bind.BindLayout;
 import com.wangenyong.mvp.view.ContentView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * Created by wangenyong on 2017/5/25.
@@ -25,7 +26,7 @@ import java.util.List;
 
 @BindLayout(R.layout.activity_main)
 public class MainView extends ContentView {
-    @BindId(R.id.bottom_bar)
+    @BindView(R.id.bottom_bar)
     BottomNavigationViewEx mNavigationViewEx;
 
     private FragNavController mFragNavController;

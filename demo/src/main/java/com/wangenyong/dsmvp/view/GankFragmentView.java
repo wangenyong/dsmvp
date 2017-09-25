@@ -5,7 +5,6 @@ import android.content.Context;
 import com.wangenyong.dsmvp.R;
 import com.wangenyong.dsmvp.entity.Gank;
 import com.wangenyong.dsmvp.itembinder.GankViewBinder;
-import com.wangenyong.mvp.bind.BindId;
 import com.wangenyong.mvp.bind.BindLayout;
 import com.wangenyong.mvp.util.UiUtils;
 import com.wangenyong.mvp.view.ContentView;
@@ -13,6 +12,7 @@ import com.wangenyong.mvp.view.recyclerview.PullLoadMoreRecyclerView;
 
 import java.util.List;
 
+import butterknife.BindView;
 import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
@@ -21,7 +21,7 @@ import me.drakeet.multitype.MultiTypeAdapter;
 
 @BindLayout(R.layout.fragment_gank)
 public class GankFragmentView extends ContentView {
-    @BindId(R.id.recyclerView_gank)
+    @BindView(R.id.recyclerView_gank)
     PullLoadMoreRecyclerView mRecyclerView;
 
     private ActionImpl mAction;

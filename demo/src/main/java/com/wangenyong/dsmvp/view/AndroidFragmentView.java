@@ -1,12 +1,12 @@
 package com.wangenyong.dsmvp.view;
 
-import android.widget.TextView;
+import android.util.Log;
 
 import com.wangenyong.dsmvp.R;
 import com.wangenyong.mvp.bind.BindLayout;
 import com.wangenyong.mvp.view.ContentView;
 
-import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by wangenyong on 2017/9/25.
@@ -14,11 +14,13 @@ import butterknife.BindView;
 
 @BindLayout(R.layout.fragment_android)
 public class AndroidFragmentView extends ContentView {
-    @BindView(R.id.textView_android)
-    TextView mTextView;
 
     public void initView() {
-        mTextView.setText("Hello Android");
+
     }
 
+    @OnClick({R.id.btn_hello, R.id.btn_hi})
+    public void hello() {
+        Log.d("Android", "hello");
+    }
 }

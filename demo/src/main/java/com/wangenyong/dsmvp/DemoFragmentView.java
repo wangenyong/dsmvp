@@ -2,9 +2,10 @@ package com.wangenyong.dsmvp;
 
 import android.widget.TextView;
 
-import com.wangenyong.mvp.bind.BindId;
 import com.wangenyong.mvp.bind.BindLayout;
 import com.wangenyong.mvp.view.ContentView;
+
+import butterknife.BindView;
 
 /**
  * Created by wangenyong on 2017/5/25.
@@ -12,7 +13,7 @@ import com.wangenyong.mvp.view.ContentView;
 
 @BindLayout(R.layout.fragment_demo)
 public class DemoFragmentView extends ContentView {
-    @BindId(R.id.textView_demoFragment)
+    @BindView(R.id.textView_demoFragment)
     TextView mTextView;
 
     private ActionImpl actionImpl;
