@@ -3,7 +3,6 @@ package com.wangenyong.mvp.view.recyclerview;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 /**
- *
  * @author wangenyong
  * @date 2017/5/23
  */

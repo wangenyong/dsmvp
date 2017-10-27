@@ -14,7 +14,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- *
  * @author wangenyong
  * @date 2017/5/23
  */
@@ -180,6 +179,7 @@ public class DataHelper {
 
     /**
      * 获取自定义缓存文件地址
+     *
      * @param context
      * @return
      */
@@ -191,10 +191,11 @@ public class DataHelper {
 
     /**
      * 创建未存在的文件夹
+     *
      * @param file
      * @return
      */
-    public static File makeDirs(File file){
+    public static File makeDirs(File file) {
         if (!file.exists()) {
             file.mkdirs();
         }

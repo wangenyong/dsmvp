@@ -19,7 +19,6 @@ import com.wangenyong.mvp.http.ProgressCancelListener;
 import java.lang.ref.WeakReference;
 
 /**
- *
  * @author wangenyong
  * @date 2017/5/23
  */
@@ -46,14 +45,14 @@ public class SimpleLoadDialog extends Handler {
 
     private void create(String info) {
         if (load == null) {
-            context  = reference.get();
+            context = reference.get();
             load = new AlertDialog.Builder(context).create();
             load.setCanceledOnTouchOutside(false);
             load.setCancelable(cancelable);
             load.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    if(mProgressCancelListener!=null) {
+                    if (mProgressCancelListener != null) {
                         mProgressCancelListener.onCancelProgress();
                     }
                 }
@@ -71,14 +70,14 @@ public class SimpleLoadDialog extends Handler {
         }
     }
 
-    public void show(String info){
+    public void show(String info) {
         create(info);
     }
 
 
-    public  void dismiss() {
-        context  = reference.get();
-        if (load != null&&load.isShowing()&&!((Activity) context).isFinishing()) {
+    public void dismiss() {
+        context = reference.get();
+        if (load != null && load.isShowing() && !((Activity) context).isFinishing()) {
             String name = Thread.currentThread().getName();
             load.dismiss();
             load = null;

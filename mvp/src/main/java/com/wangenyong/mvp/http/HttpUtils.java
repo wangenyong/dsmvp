@@ -9,14 +9,14 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 /**
- *
  * @author wangenyong
  * @date 2017/5/24
  */
 
 public class HttpUtils {
 
-    private HttpUtils() {}
+    private HttpUtils() {
+    }
 
     private static class SingletonHolder {
         private static final HttpUtils INSTANCE = new HttpUtils();

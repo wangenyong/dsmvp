@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.io.IOException;
 
 /**
- *
  * @author wangenyong
  * @date 2017/5/23
  */

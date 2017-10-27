@@ -1,7 +1,6 @@
 package com.wangenyong.mvp.http;
 
 /**
- *
  * @author wangenyong
  * @date 2017/5/23
  */

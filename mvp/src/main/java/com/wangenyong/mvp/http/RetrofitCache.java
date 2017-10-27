@@ -12,14 +12,13 @@ import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- *
  * @author wangenyong
  * @date 2017/5/25
  */
 
 public class RetrofitCache {
     /**
-     * @param cacheKey 缓存的Key
+     * @param cacheKey     缓存的Key
      * @param fromNetwork
      * @param isSave       是否缓存
      * @param forceRefresh 是否强制刷新

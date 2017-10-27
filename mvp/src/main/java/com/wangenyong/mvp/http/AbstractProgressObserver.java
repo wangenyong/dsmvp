@@ -9,7 +9,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 /**
- *
  * @author wangenyong
  * @date 2017/5/24
  */
@@ -84,12 +83,14 @@ public abstract class AbstractProgressObserver<T> implements Observer<T>, Progre
 
     /**
      * 成功
+     *
      * @param t JSON数据
      */
     protected abstract void onSuccess(T t);
 
     /**
      * 失败
+     *
      * @param message 消息
      */
     protected abstract void onFail(String message);

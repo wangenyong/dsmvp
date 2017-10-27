@@ -19,10 +19,11 @@ public class RxHelper {
 
     /**
      * 对网络数据进行预处理
+     *
      * @param <T>
      * @return
      */
-    public static <T>ObservableTransformer<AbstractHttpResult<T>, T> handleResult() {
+    public static <T> ObservableTransformer<AbstractHttpResult<T>, T> handleResult() {
         return new ObservableTransformer<AbstractHttpResult<T>, T>() {
             @Override
             public ObservableSource<T> apply(@NonNull Observable<AbstractHttpResult<T>> upstream) {
@@ -45,6 +46,7 @@ public class RxHelper {
 
     /**
      * 创建成功的数据
+     *
      * @param data
      * @param <T>
      * @return
