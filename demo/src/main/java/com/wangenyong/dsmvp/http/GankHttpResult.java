@@ -1,12 +1,14 @@
 package com.wangenyong.dsmvp.http;
 
-import com.wangenyong.mvp.http.HttpResult;
+import com.wangenyong.mvp.http.AbstractHttpResult;
 
 /**
- * Created by wangenyong on 2017/5/25.
+ *
+ * @author wangenyong
+ * @date 2017/5/25
  */
 
-public class GankHttpResult<T> extends HttpResult<T> {
+public class GankHttpResult<T> extends AbstractHttpResult<T> {
     boolean error;
     String message = "";
 

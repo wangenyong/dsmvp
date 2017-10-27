@@ -16,7 +16,7 @@ import com.wangenyong.dsmvp.http.Api;
 import com.wangenyong.dsmvp.itembinder.GankViewBinder;
 import com.wangenyong.mvp.base.BaseFragment;
 import com.wangenyong.mvp.http.HttpUtils;
-import com.wangenyong.mvp.http.ProgressObserver;
+import com.wangenyong.mvp.http.AbstractProgressObserver;
 import com.wangenyong.mvp.util.UiUtils;
 import com.wangenyong.mvp.view.recyclerview.PullLoadMoreRecyclerView;
 
@@ -80,9 +80,9 @@ public class GankFragment extends BaseFragment implements PullLoadMoreRecyclerVi
 
     private void getGank(int page, final boolean isRefresh, final boolean isLoadMore) {
         Observable ob = Api.getDefault().getGank(20, page);
-        HttpUtils.getInstance().toSubscribe(ob, new ProgressObserver<List<Gank>>(getActivity(), isRefresh, isLoadMore, " ") {
+        HttpUtils.getInstance().toSubscribe(ob, new AbstractProgressObserver<List<Gank>>(getActivity(), isRefresh, isLoadMore, " ") {
             @Override
-            protected void _onNext(List<Gank> ganks) {
+            protected void onSuccess(List<Gank> ganks) {
                 if (isRefresh) {
                     ganks.clear();
                 }
@@ -92,7 +92,7 @@ public class GankFragment extends BaseFragment implements PullLoadMoreRecyclerVi
             }
 
             @Override
-            protected void _onError(String message) {
+            protected void onFail(String message) {
                 Log.d("Gank", message);
                 if (isLoadMore) {
                     mPage--;

@@ -9,10 +9,12 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by wangenyong on 2017/5/24.
+ *
+ * @author wangenyong
+ * @date 2017/5/24
  */
 
-public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancelListener {
+public abstract class AbstractProgressObserver<T> implements Observer<T>, ProgressCancelListener {
 
     private SimpleLoadDialog dialogHandler;
     private Disposable mDisposable;
@@ -20,7 +22,7 @@ public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancel
     private boolean isLoadMore;
     private String loadingInfo;
 
-    public ProgressObserver(Context context, boolean refresh, boolean loadMore, String info) {
+    public AbstractProgressObserver(Context context, boolean refresh, boolean loadMore, String info) {
         isRefresh = refresh;
         isLoadMore = loadMore;
         loadingInfo = info;
@@ -34,7 +36,7 @@ public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancel
 
     @Override
     public void onNext(T t) {
-        _onNext(t);
+        onSuccess(t);
     }
 
     @Override
@@ -42,9 +44,9 @@ public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancel
         t.printStackTrace();
         dismissProgressDialog();
         if (t instanceof ApiException) {
-            _onError(t.getMessage());
+            onFail(t.getMessage());
         } else {
-            _onError("请求失败，请稍后再试...");
+            onFail("请求失败，请稍后再试...");
         }
     }
 
@@ -64,7 +66,7 @@ public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancel
     /**
      * 显示Dialog
      */
-    public void showProgressDialog(){
+    public void showProgressDialog() {
         if (!isRefresh && !isLoadMore && dialogHandler != null) {
             dialogHandler.show(loadingInfo);
         }
@@ -73,13 +75,24 @@ public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancel
     /**
      * 隐藏Dialog
      */
-    private void dismissProgressDialog(){
+    private void dismissProgressDialog() {
         if (dialogHandler != null) {
             dialogHandler.dismiss();
             dialogHandler = null;
         }
     }
 
-    protected abstract void _onNext(T t);
-    protected abstract void _onError(String message);
+    /**
+     * 成功
+     * @param t JSON数据
+     */
+    protected abstract void onSuccess(T t);
+
+    /**
+     * 失败
+     * @param message 消息
+     */
+    protected abstract void onFail(String message);
+
 }
+

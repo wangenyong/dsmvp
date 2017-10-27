@@ -22,13 +22,13 @@ public class RxHelper {
      * @param <T>
      * @return
      */
-    public static <T>ObservableTransformer<HttpResult<T>, T> handleResult() {
-        return new ObservableTransformer<HttpResult<T>, T>() {
+    public static <T>ObservableTransformer<AbstractHttpResult<T>, T> handleResult() {
+        return new ObservableTransformer<AbstractHttpResult<T>, T>() {
             @Override
-            public ObservableSource<T> apply(@NonNull Observable<HttpResult<T>> upstream) {
-                return upstream.flatMap(new Function<HttpResult<T>, ObservableSource<T>>() {
+            public ObservableSource<T> apply(@NonNull Observable<AbstractHttpResult<T>> upstream) {
+                return upstream.flatMap(new Function<AbstractHttpResult<T>, ObservableSource<T>>() {
                     @Override
-                    public ObservableSource<T> apply(@NonNull HttpResult<T> tHttpResult) throws Exception {
+                    public ObservableSource<T> apply(@NonNull AbstractHttpResult<T> tHttpResult) throws Exception {
                         if (tHttpResult.successful()) {
                             return createData(tHttpResult.getData());
                         } else {

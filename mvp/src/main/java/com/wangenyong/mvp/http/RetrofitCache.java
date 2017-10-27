@@ -12,7 +12,9 @@ import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by wangenyong on 2017/5/25.
+ *
+ * @author wangenyong
+ * @date 2017/5/25
  */
 
 public class RetrofitCache {
@@ -55,7 +57,6 @@ public class RetrofitCache {
         if (forceRefresh) {
             return fromNetwork;
         } else {
-//            return Observable.concat(fromCache, fromNetwork).first();
             return Observable.concat(fromCache, fromNetwork).filter(new Predicate<T>() {
                 @Override
                 public boolean test(@NonNull T t) throws Exception {

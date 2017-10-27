@@ -9,7 +9,9 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 /**
- * Created by wangenyong on 2017/5/24.
+ *
+ * @author wangenyong
+ * @date 2017/5/24
  */
 
 public class HttpUtils {
@@ -27,7 +29,7 @@ public class HttpUtils {
         return SingletonHolder.INSTANCE;
     }
 
-    public void toSubscribe(final Observable ob, final ProgressObserver observer, String cacheKey, RxAppCompatActivity activity, boolean isSave, boolean forceRefresh) {
+    public void toSubscribe(final Observable ob, final AbstractProgressObserver observer, String cacheKey, RxAppCompatActivity activity, boolean isSave, boolean forceRefresh) {
         Observable observable = ob
                 .compose(RxHelper.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -42,7 +44,7 @@ public class HttpUtils {
                 .subscribe(observer);
     }
 
-    public void toSubscribe(final Observable ob, final ProgressObserver observer, String cacheKey, RxFragment fragment, boolean isSave, boolean forceRefresh) {
+    public void toSubscribe(final Observable ob, final AbstractProgressObserver observer, String cacheKey, RxFragment fragment, boolean isSave, boolean forceRefresh) {
         final Observable observable = ob
                 .compose(RxHelper.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {

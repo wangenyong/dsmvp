@@ -1,9 +1,14 @@
 package com.wangenyong.mvp.http;
 
 /**
- * Created by wangenyong on 2017/5/23.
+ *
+ * @author wangenyong
+ * @date 2017/5/23
  */
 
 public interface ProgressCancelListener {
+    /**
+     * 取消进度提示
+     */
     void onCancelProgress();
 }
