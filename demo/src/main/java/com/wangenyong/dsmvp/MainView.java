@@ -57,7 +57,7 @@ public class MainView extends ContentView {
         DemoFragment otherFragment = new DemoFragment();
         bundle = new Bundle();
         bundle.putString("text", "Other");
-        userFragment.setArguments(bundle);
+        otherFragment.setArguments(bundle);
 
         fragments.add(gankFragment);
         fragments.add(androidFragment);
