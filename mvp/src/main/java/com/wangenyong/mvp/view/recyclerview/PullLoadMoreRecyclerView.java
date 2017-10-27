@@ -95,6 +95,9 @@ public class PullLoadMoreRecyclerView extends LinearLayout {
         mRecyclerView.setLayoutManager(gridLayoutManager);
     }
 
+    public void setGridLayout(GridLayoutManager manager) {
+        mRecyclerView.setLayoutManager(manager);
+    }
 
     /**
      * StaggeredGridLayoutManager
