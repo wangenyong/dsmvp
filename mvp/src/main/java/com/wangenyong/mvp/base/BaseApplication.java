@@ -5,7 +5,9 @@ import android.app.Application;
 import com.orhanobut.hawk.Hawk;
 
 /**
- * Created by wangenyong on 2017/5/24.
+ *
+ * @author wangenyong
+ * @date 2017/5/24
  */
 
 public class BaseApplication extends Application {

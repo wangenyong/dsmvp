@@ -6,6 +6,7 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @author wangenyong
  */
 public class BaseFragment extends RxFragment {
 
