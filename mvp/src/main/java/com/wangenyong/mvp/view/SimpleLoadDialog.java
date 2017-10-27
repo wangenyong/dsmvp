@@ -19,7 +19,9 @@ import com.wangenyong.mvp.http.ProgressCancelListener;
 import java.lang.ref.WeakReference;
 
 /**
- * Created by wangenyong on 2017/5/23.
+ *
+ * @author wangenyong
+ * @date 2017/5/23
  */
 
 public class SimpleLoadDialog extends Handler {
@@ -51,8 +53,9 @@ public class SimpleLoadDialog extends Handler {
             load.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    if(mProgressCancelListener!=null)
+                    if(mProgressCancelListener!=null) {
                         mProgressCancelListener.onCancelProgress();
+                    }
                 }
             });
             if (!load.isShowing() && context != null) {
@@ -91,6 +94,7 @@ public class SimpleLoadDialog extends Handler {
             case DISMISS_PROGRESS_DIALOG:
                 dismiss();
                 break;
+            default:
         }
     }
 }
