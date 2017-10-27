@@ -10,7 +10,9 @@ import android.widget.TextView;
 import java.io.IOException;
 
 /**
- * Created by wangenyong on 2017/5/23.
+ *
+ * @author wangenyong
+ * @date 2017/5/23
  */
 
 public class DrawableProvider {
@@ -110,7 +112,8 @@ public class DrawableProvider {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         Matrix matrix = new Matrix();
-        matrix.postScale(targetWidth / width, targetheight / height); //长和宽放大缩小的比例
+        //长和宽放大缩小的比例
+        matrix.postScale(targetWidth / width, targetheight / height);
         try {
             returnBm = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
         } catch (Exception e) {
@@ -179,6 +182,7 @@ public class DrawableProvider {
                 case ExifInterface.ORIENTATION_ROTATE_270:
                     degree = 270;
                     break;
+                default:
             }
         } catch (IOException e) {
             e.printStackTrace();
