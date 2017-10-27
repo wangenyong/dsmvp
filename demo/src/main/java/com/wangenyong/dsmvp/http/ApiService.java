@@ -9,7 +9,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 /**
- * Created by wangenyong on 2017/5/25.
+ *
+ * @author wangenyong
+ * @date 2017/5/25
  */
 
 public interface ApiService {

@@ -18,6 +18,9 @@ import com.wangenyong.mvp.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author wangenyong
+ */
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding mBinding;
     private FragNavController mFragNavController;

@@ -26,6 +26,9 @@ import java.util.List;
 import io.reactivex.Observable;
 import me.drakeet.multitype.MultiTypeAdapter;
 
+/**
+ * @author wangenyong
+ */
 public class GankFragment extends BaseFragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
     private List<Gank> mGanks = new ArrayList<>();
     private int mPage = 1;

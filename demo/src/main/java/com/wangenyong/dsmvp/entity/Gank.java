@@ -7,7 +7,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by wangenyong on 2017/5/25.
+ *
+ * @author wangenyong
+ * @date 2017/5/25
  */
 
 public class Gank implements Serializable

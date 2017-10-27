@@ -14,6 +14,7 @@ import com.wangenyong.dsmvp.databinding.FragmentAndroidBinding;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @author wangenyong
  */
 public class AndroidFragment extends Fragment {
     private FragmentAndroidBinding mBinding;

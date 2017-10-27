@@ -15,6 +15,7 @@ import com.wangenyong.mvp.base.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @author wangenyong
  */
 public class DemoFragment extends BaseFragment {
     private FragmentDemoBinding mBinding;
