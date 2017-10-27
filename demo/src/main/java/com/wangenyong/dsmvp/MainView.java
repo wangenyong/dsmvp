@@ -9,9 +9,8 @@ import android.view.MenuItem;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.ncapdevi.fragnav.FragNavController;
-import com.wangenyong.dsmvp.presentation.AndroidFragment;
-import com.wangenyong.dsmvp.presentation.BindingFragment;
-import com.wangenyong.dsmvp.presentation.GankFragment;
+import com.wangenyong.dsmvp.view.AndroidFragment;
+import com.wangenyong.dsmvp.view.GankFragment;
 import com.wangenyong.mvp.base.BaseActivity;
 import com.wangenyong.mvp.bind.BindLayout;
 import com.wangenyong.mvp.view.ContentView;
@@ -50,17 +49,20 @@ public class MainView extends ContentView {
 
         AndroidFragment androidFragment = AndroidFragment.newInstance();
 
-        BindingFragment bindingFragment = BindingFragment.newInstance();
-
         DemoFragment userFragment = new DemoFragment();
         Bundle bundle = new Bundle();
         bundle.putString("text", "User");
         userFragment.setArguments(bundle);
 
+        DemoFragment otherFragment = new DemoFragment();
+        bundle = new Bundle();
+        bundle.putString("text", "Other");
+        userFragment.setArguments(bundle);
+
         fragments.add(gankFragment);
         fragments.add(androidFragment);
-        fragments.add(bindingFragment);
         fragments.add(userFragment);
+        fragments.add(otherFragment);
 
         FragNavController.Builder builder = FragNavController.newBuilder(savedInstanceState, activity.getSupportFragmentManager(), R.id.contentContainer);
         builder.rootFragments(fragments);

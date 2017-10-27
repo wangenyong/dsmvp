@@ -1,4 +1,4 @@
-package com.wangenyong.dsmvp.presentation;
+package com.wangenyong.dsmvp.view;
 
 
 import android.databinding.DataBindingUtil;
