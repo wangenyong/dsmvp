@@ -14,7 +14,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- * Created by wangenyong on 2017/5/23.
+ *
+ * @author wangenyong
+ * @date 2017/5/23
  */
 
 public class DataHelper {
@@ -27,7 +29,7 @@ public class DataHelper {
      * @param key
      * @param value
      */
-    public static void SetStringSF(Context context, String key, String value) {
+    public static void setStringSF(Context context, String key, String value) {
         if (mSharedPreferences == null) {
             mSharedPreferences = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
         }
@@ -53,7 +55,7 @@ public class DataHelper {
      * @param key
      * @param value
      */
-    public static void SetIntergerSF(Context context, String key, int value) {
+    public static void setIntergerSF(Context context, String key, int value) {
         if (mSharedPreferences == null) {
             mSharedPreferences = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
         }
@@ -111,9 +113,9 @@ public class DataHelper {
             // 将对象写入字节流
             oos.writeObject(device);
             // 将字节流编码成base64的字符串
-            String oAuth_Base64 = new String(Base64.encode(baos
+            String oAuthBase64 = new String(Base64.encode(baos
                     .toByteArray(), Base64.DEFAULT));
-            mSharedPreferences.edit().putString(key, oAuth_Base64).apply();
+            mSharedPreferences.edit().putString(key, oAuthBase64).apply();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -163,8 +165,10 @@ public class DataHelper {
     public static File getCacheFile(Context context) {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             File file = null;
-            file = context.getExternalCacheDir();//获取系统管理的sd卡缓存文件
-            if (file == null) {//如果获取的为空,就是用自己定义的缓存文件夹做缓存路径
+            //获取系统管理的sd卡缓存文件
+            file = context.getExternalCacheDir();
+            //如果获取的为空,就是用自己定义的缓存文件夹做缓存路径
+            if (file == null) {
                 file = new File(getCacheFilePath(context));
                 makeDirs(file);
             }
@@ -217,7 +221,8 @@ public class DataHelper {
                 dirSize += file.length();
             } else if (file.isDirectory()) {
                 dirSize += file.length();
-                dirSize += getDirSize(file); // 递归调用继续统计
+                // 递归调用继续统计
+                dirSize += getDirSize(file);
             }
         }
         return dirSize;
@@ -229,7 +234,7 @@ public class DataHelper {
      * @param dir
      * @return
      */
-    public static boolean DeleteDir(File dir) {
+    public static boolean deleteDir(File dir) {
         if (dir == null) {
             return false;
         }
@@ -241,14 +246,15 @@ public class DataHelper {
             if (file.isFile()) {
                 file.delete();
             } else if (file.isDirectory()) {
-                DeleteDir(file); // 递归调用继续删除
+                // 递归调用继续删除
+                deleteDir(file);
             }
         }
         return true;
     }
 
 
-    public static String BytyToString(InputStream in) throws IOException {
+    public static String bytyToString(InputStream in) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         byte[] buf = new byte[1024];
         int num = 0;

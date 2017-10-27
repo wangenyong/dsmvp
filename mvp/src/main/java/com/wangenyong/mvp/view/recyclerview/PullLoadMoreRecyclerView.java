@@ -173,8 +173,9 @@ public class PullLoadMoreRecyclerView extends LinearLayout {
 
             @Override
             public void run() {
-                if (pullRefreshEnable)
+                if (pullRefreshEnable) {
                     mSwipeRefreshLayout.setRefreshing(isRefreshing);
+                }
             }
         });
 
