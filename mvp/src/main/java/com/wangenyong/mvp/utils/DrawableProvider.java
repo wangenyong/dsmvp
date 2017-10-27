@@ -1,4 +1,4 @@
-package com.wangenyong.mvp.util;
+package com.wangenyong.mvp.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;

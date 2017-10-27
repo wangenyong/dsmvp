@@ -1,4 +1,4 @@
-package com.wangenyong.mvp.util;
+package com.wangenyong.mvp.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,7 +24,7 @@ import java.security.MessageDigest;
  * Created by wangenyong on 2017/5/23.
  */
 
-public class UiUtils {
+public class UiUtil {
     static public Toast mToast;
 
     /**

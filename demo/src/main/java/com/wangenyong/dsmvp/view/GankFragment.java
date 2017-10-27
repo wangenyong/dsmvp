@@ -17,7 +17,7 @@ import com.wangenyong.dsmvp.itembinder.GankViewBinder;
 import com.wangenyong.mvp.base.BaseFragment;
 import com.wangenyong.mvp.http.HttpUtils;
 import com.wangenyong.mvp.http.AbstractProgressObserver;
-import com.wangenyong.mvp.util.UiUtils;
+import com.wangenyong.mvp.utils.UiUtil;
 import com.wangenyong.mvp.view.recyclerview.PullLoadMoreRecyclerView;
 
 import java.util.ArrayList;
@@ -101,7 +101,7 @@ public class GankFragment extends BaseFragment implements PullLoadMoreRecyclerVi
                     mPage--;
                 }
                 mBinding.recyclerViewGank.setPullLoadMoreCompleted();
-                UiUtils.makeText(getActivity(), message);
+                UiUtil.makeText(getActivity(), message);
             }
         }, "cacheKey", this, false, true);
     }
