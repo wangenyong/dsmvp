@@ -21,7 +21,8 @@ import android.widget.TextView;
 import com.wangenyong.mvp.R;
 
 /**
- * Created by wangenyong on 2017/5/23.
+ * @author wangenyong
+ * @date 2017/5/23
  */
 
 public class PullLoadMoreRecyclerView extends LinearLayout {
@@ -62,7 +63,7 @@ public class PullLoadMoreRecyclerView extends LinearLayout {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addOnScrollListener(new RecyclerViewOnScroll(this));
 
-        mRecyclerView.setOnTouchListener(new onTouchRecyclerView());
+        mRecyclerView.setOnTouchListener(new OnTouchRecyclerView());
 
         mFooterView = view.findViewById(R.id.footerView);
 
@@ -184,7 +185,7 @@ public class PullLoadMoreRecyclerView extends LinearLayout {
     /**
      * Solve IndexOutOfBoundsException exception
      */
-    public class onTouchRecyclerView implements OnTouchListener {
+    public class OnTouchRecyclerView implements OnTouchListener {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             return isRefresh || isLoadMore;
@@ -291,8 +292,14 @@ public class PullLoadMoreRecyclerView extends LinearLayout {
     }
 
     public interface PullLoadMoreListener {
+        /**
+         * 下拉刷新
+         */
         void onRefresh();
 
+        /**
+         * 加载更多
+         */
         void onLoadMore();
     }
 }
