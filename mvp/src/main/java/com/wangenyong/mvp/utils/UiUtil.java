@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
@@ -21,7 +22,9 @@ import android.widget.Toast;
 import java.security.MessageDigest;
 
 /**
- * Created by wangenyong on 2017/5/23.
+ *
+ * @author wangenyong
+ * @date 2017/5/23
  */
 
 public class UiUtil {
@@ -42,8 +45,8 @@ public class UiUtil {
         // 附加属性到文本
         ss.setSpan(ass, 0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        // 设置hint
-        v.setHint(new SpannedString(ss)); // 一定要进行转换,否则属性会消失
+        // 设置hint 一定要进行转换,否则属性会消失
+        v.setHint(new SpannedString(ss));
     }
 
 
@@ -193,7 +196,7 @@ public class UiUtil {
      * @return
      */
     public static Drawable getDrawablebyResource(Context context, int rID) {
-        return getResources(context).getDrawable(rID);
+        return ContextCompat.getDrawable(context, rID);
     }
 
     /**
@@ -234,7 +237,7 @@ public class UiUtil {
      * 获得颜色
      */
     public static int getColor(Context context, int rid) {
-        return getResources(context).getColor(rid);
+        return ContextCompat.getColor(context, rid);
     }
 
     /**
@@ -272,7 +275,7 @@ public class UiUtil {
      * @return
      * @throws Exception
      */
-    public static String MD5encode(String string) {
+    public static String Md5encode(String string) {
         byte[] hash = new byte[0];
         try {
             hash = MessageDigest.getInstance("MD5").digest(
