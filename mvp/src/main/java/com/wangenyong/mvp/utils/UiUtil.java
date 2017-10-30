@@ -275,7 +275,7 @@ public class UiUtil {
      * @return
      * @throws Exception
      */
-    public static String Md5encode(String string) {
+    public static String md5encode(String string) {
         byte[] hash = new byte[0];
         try {
             hash = MessageDigest.getInstance("MD5").digest(

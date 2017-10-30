@@ -55,12 +55,13 @@ public class RecyclerViewOnScroll extends RecyclerView.OnScrollListener {
         } else {
             mPullLoadMoreRecyclerView.setSwipeRefreshEnable(false);
         }
-        if (mPullLoadMoreRecyclerView.getPushRefreshEnable()
+        boolean isLoadMore = mPullLoadMoreRecyclerView.getPushRefreshEnable()
                 && !mPullLoadMoreRecyclerView.isRefresh()
                 && mPullLoadMoreRecyclerView.isHasMore()
                 && (lastItem == totalItemCount - 1)
                 && !mPullLoadMoreRecyclerView.isLoadMore()
-                && (dx > 0 || dy > 0)) {
+                && (dx > 0 || dy > 0);
+        if (isLoadMore) {
             mPullLoadMoreRecyclerView.setIsLoadMore(true);
             mPullLoadMoreRecyclerView.loadMore();
         }
