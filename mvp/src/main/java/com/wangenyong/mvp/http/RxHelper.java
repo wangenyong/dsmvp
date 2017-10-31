@@ -12,7 +12,6 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- *
  * @author wangenyong
  * @date 2017/5/23
  */
@@ -39,8 +38,6 @@ public class RxHelper {
                         }
                     }
                 }).subscribeOn(Schedulers.io())
-                        .unsubscribeOn(Schedulers.io())
-                        .subscribeOn(AndroidSchedulers.mainThread())
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };

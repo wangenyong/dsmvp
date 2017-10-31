@@ -18,6 +18,8 @@ import com.wangenyong.mvp.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+
 /**
  * @author wangenyong
  */
