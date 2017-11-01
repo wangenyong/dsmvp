@@ -1,9 +1,5 @@
 package com.wangenyong.dsmvp.http;
 
-import com.wangenyong.dsmvp.entity.Gank;
-
-import java.util.List;
-
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

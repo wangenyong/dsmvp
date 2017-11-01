@@ -1,23 +1,15 @@
 package com.wangenyong.dsmvp.http;
 
-import android.app.Activity;
-
-import com.trello.rxlifecycle2.components.RxFragment;
 import com.wangenyong.dsmvp.entity.Gank;
 import com.wangenyong.dsmvp.view.GankFragment;
 import com.wangenyong.mvp.http.AbstractProgressObserver;
 import com.wangenyong.mvp.http.HttpUtils;
-import com.wangenyong.mvp.http.RxHelper;
 
 import java.io.File;
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.functions.Function;
 import io.rx_cache2.DynamicKey;
 import io.rx_cache2.EvictProvider;
-import io.rx_cache2.Reply;
 import io.rx_cache2.internal.RxCache;
 import io.victoralbertos.jolyglot.GsonSpeaker;
 import retrofit2.Retrofit;

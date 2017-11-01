@@ -1,15 +1,11 @@
 package com.wangenyong.dsmvp.http;
 
-import com.wangenyong.dsmvp.entity.Gank;
-
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.rx_cache2.DynamicKey;
 import io.rx_cache2.EvictProvider;
 import io.rx_cache2.LifeCache;
-import io.rx_cache2.Reply;
 
 /**
  *
