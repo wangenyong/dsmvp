@@ -63,7 +63,7 @@ public abstract class AbstractProgressObserver<T> implements Observer<T>, Progre
                 } else if (throwable instanceof RxCacheException) {
                     //缓存异常暂时不做处理
                 } else if (throwable instanceof MalformedJsonException) {
-                    onFail(ApiException.CODE_MALFORMEDJSON, ApiException.MALFORMED_JSON_EXCEPTION);
+                    onFail(ApiException.CODE_MALFORMED_JSON, ApiException.MALFORMED_JSON_EXCEPTION);
                 }
             }
         } else {
