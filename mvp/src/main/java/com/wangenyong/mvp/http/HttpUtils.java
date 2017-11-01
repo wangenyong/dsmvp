@@ -29,7 +29,7 @@ public class HttpUtils {
         return SingletonHolder.INSTANCE;
     }
 
-    public void toSubscribe(final Observable ob, final AbstractProgressObserver observer, String cacheKey, RxAppCompatActivity activity, boolean isSave, boolean forceRefresh) {
+    public void toSubscribe(final Observable ob, final AbstractProgressObserver observer, RxAppCompatActivity activity) {
         Observable observable = ob
                 .compose(RxHelper.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -40,11 +40,10 @@ public class HttpUtils {
                 })
                 .compose(activity.bindToLifecycle());
 
-        RetrofitCache.load(cacheKey, observable, isSave, forceRefresh)
-                .subscribe(observer);
+        observable.subscribe(observer);
     }
 
-    public void toSubscribe(final Observable ob, final AbstractProgressObserver observer, String cacheKey, RxFragment fragment, boolean isSave, boolean forceRefresh) {
+    public void toSubscribe(final Observable ob, final AbstractProgressObserver observer, RxFragment fragment) {
         final Observable observable = ob
                 .compose(RxHelper.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -54,8 +53,7 @@ public class HttpUtils {
                     }
                 })
                 .compose(fragment.bindToLifecycle());
-        RetrofitCache.load(cacheKey, observable, isSave, forceRefresh)
-                .subscribe(observer);
+        observable.subscribe(observer);
     }
 }
 

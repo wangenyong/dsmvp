@@ -6,6 +6,8 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
+import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
@@ -38,6 +40,7 @@ public class RxHelper {
                         }
                     }
                 }).subscribeOn(Schedulers.io())
+                        .unsubscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };
@@ -50,7 +53,7 @@ public class RxHelper {
      * @param <T>
      * @return
      */
-    private static <T> Observable<T> createData(final T data) {
+    public static <T> Observable<T> createData(final T data) {
         return Observable.create(new ObservableOnSubscribe<T>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<T> emitter) throws Exception {

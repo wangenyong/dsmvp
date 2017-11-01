@@ -11,10 +11,11 @@ import retrofit2.http.Path;
 /**
  *
  * @author wangenyong
- * @date 2017/5/25
+ * @date 2017/11/1
  */
 
-public interface ApiService {
+public interface RestApi {
+    String URL_BASE = "http://gank.io/api/";
 
     /**
      * 获取干货数据
@@ -23,5 +24,5 @@ public interface ApiService {
      * @return
      */
     @GET("data/all/{num}/{page}")
-    Observable<GankHttpResult<List<Gank>>> getGank(@Path("num") int num, @Path("page") int page);
+    Observable<GankHttpResult> getGank(@Path("num") int num, @Path("page") int page);
 }

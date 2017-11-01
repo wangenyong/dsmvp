@@ -1,5 +1,6 @@
 package com.wangenyong.dsmvp;
 
+import com.wangenyong.dsmvp.http.Repository;
 import com.wangenyong.mvp.base.BaseApplication;
 
 /**
@@ -9,9 +10,15 @@ import com.wangenyong.mvp.base.BaseApplication;
  */
 
 public class MyApplication extends BaseApplication {
+    private Repository mRepository;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        mRepository = Repository.init(getFilesDir());
+    }
+
+    public Repository getRepository() {
+        return mRepository;
     }
 }

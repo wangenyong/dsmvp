@@ -1,6 +1,9 @@
 package com.wangenyong.dsmvp.http;
 
+import com.wangenyong.dsmvp.entity.Gank;
 import com.wangenyong.mvp.http.AbstractHttpResult;
+
+import java.util.List;
 
 /**
  *
@@ -8,11 +11,11 @@ import com.wangenyong.mvp.http.AbstractHttpResult;
  * @date 2017/5/25
  */
 
-public class GankHttpResult<T> extends AbstractHttpResult<T> {
+public class GankHttpResult extends AbstractHttpResult<List<Gank>> {
     boolean error;
     String message = "";
 
-    T results;
+    List<Gank> results;
 
     @Override
     public boolean successful() {
@@ -20,7 +23,7 @@ public class GankHttpResult<T> extends AbstractHttpResult<T> {
     }
 
     @Override
-    public T getData() {
+    public List<Gank> getData() {
         return results;
     }
 

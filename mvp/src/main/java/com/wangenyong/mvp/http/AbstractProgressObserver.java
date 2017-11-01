@@ -2,11 +2,18 @@ package com.wangenyong.mvp.http;
 
 import android.content.Context;
 
+import com.google.gson.stream.MalformedJsonException;
 import com.wangenyong.mvp.view.SimpleLoadDialog;
+
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.exceptions.CompositeException;
+import io.rx_cache2.RxCacheException;
 
 /**
  * @author wangenyong
@@ -42,10 +49,32 @@ public abstract class AbstractProgressObserver<T> implements Observer<T>, Progre
     public void onError(Throwable t) {
         t.printStackTrace();
         dismissProgressDialog();
-        if (t instanceof ApiException) {
-            onFail(t.getMessage());
+
+        if (t instanceof CompositeException) {
+            CompositeException compositeException = (CompositeException) t;
+            for (Throwable throwable : compositeException.getExceptions()) {
+                if (throwable instanceof SocketTimeoutException) {
+                    onFail(ApiException.Code_TimeOut, ApiException.SOCKET_TIMEOUT_EXCEPTION);
+                } else if (throwable instanceof ConnectException) {
+                    onFail(ApiException.Code_UnConnected, ApiException.CONNECT_EXCEPTION);
+                } else if (throwable instanceof UnknownHostException) {
+                    onFail(ApiException.Code_UnConnected, ApiException.CONNECT_EXCEPTION);
+                } else if (throwable instanceof RxCacheException) {
+                    //缓存异常暂时不做处理
+                } else if (throwable instanceof MalformedJsonException) {
+                    onFail(ApiException.Code_MalformedJson, ApiException.MALFORMED_JSON_EXCEPTION);
+                }
+            }
         } else {
-            onFail("请求失败，请稍后再试...");
+            String msg = t.getMessage();
+            int code;
+            if (msg.contains("#")) {
+                code = Integer.parseInt(msg.split("#")[0]);
+                onFail(code, msg.split("#")[1]);
+            } else {
+                code = ApiException.Code_Default;
+                onFail(code, msg);
+            }
         }
     }
 
@@ -93,7 +122,7 @@ public abstract class AbstractProgressObserver<T> implements Observer<T>, Progre
      *
      * @param message 消息
      */
-    protected abstract void onFail(String message);
+    protected abstract void onFail(int code, String message);
 
 }
 
